@@ -13,7 +13,7 @@ const App = () => {
       </p>
 
       <div className='main-app'>
-
+        hello world
       </div>
     </div>
   )

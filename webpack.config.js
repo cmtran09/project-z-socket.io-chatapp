@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const Dotenv = require('dotenv-webpack');
 
 module.exports = {
 	entry: './frontend/src/App.js',
@@ -31,14 +30,13 @@ module.exports = {
 		watchContentBase: true,
 		historyApiFallback: true,
 		proxy: {
-		  '/api': {
-			target: 'http://localhost:5000',
-			secure: false
-		  }
+			'/api': {
+				target: 'http://localhost:5000',
+				secure: false
+			}
 		}
-	  },
+	},
 	plugins: [
-		new Dotenv(),
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
 			template: 'frontend/src/index.html',
