@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { BrowserRouter, Switch, Route } from "react-router-dom"
 import ReactDOM from 'react-dom'
 
 import './styles/styles.scss'
 
+import Home from './components/Home/Home'
+import Chat from './components/Chat/Chat'
+import Header from './components/Header/Header'
+
 const App = () => {
-
-
   return (
-    <div>
-      <p className='cmtran09head'>
-        Project Z - Socket.io - chatapp
-      </p>
-
-      <div className='main-app'>
-        hello world
-      </div>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Route path="/" component={Home} />
+      <Route path="/chat" component={Chat} />
+    </BrowserRouter>
   )
 }
 
