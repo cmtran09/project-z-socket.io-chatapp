@@ -1,20 +1,33 @@
 const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
+const socketio = require('socket.io')
+const http = require('http')
+
 const PORT = process.env.PORT || 5000
+
+const app = express()
+
+const server = http.createServer(app)
+const io = socketio(server)
+
 // const path = require('path')
 // const dist = path.join(__dirname, '../dist')
 
 const router = require('./config/router')
-
-app.use(bodyParser.json())
 
 app.use((req, resp, next) => {
   console.log(`${req.method} to ${req.url}`)
   next()
 })
 
-app.use('/api', router)
+io.on('connection', (socket) => {
+  console.log('conntection created, user entered')
+
+  socket.on('disconnect', () => {
+    console.log('user has left')
+  })
+})
+
+app.use('/', router)
 
 // for deployment
 // app.use('/', express.static(dist))
@@ -24,4 +37,4 @@ app.use('/api', router)
 //   res.sendFile(path.join(dist, 'index.html'))
 // });
 
-app.listen(PORT, () => console.log(`Up and running on port ${PORT}`))
+server.listen(PORT, () => console.log(`Server up and running on port ${PORT}`))
