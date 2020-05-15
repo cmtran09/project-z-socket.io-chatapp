@@ -6,6 +6,10 @@ import io from 'socket.io-client'
 let socket
 
 export default function Chat() {
+
+  const [userMsg, setUserMsg] = useState('')
+  const [allMsg, setAllMsg] = useState(['hwllo', 'my', 'name', 'is', 'a', 'test'])
+
   console.log("hi")
 
   useEffect(() => {
@@ -17,7 +21,11 @@ export default function Chat() {
     <div>
       <div className='main-app'>
         hello world caht compneont
-        </div>
+      </div>
+      {allMsg.map((elem, i) => <p key={i}>{elem}</p>)}
+      <input onChange={e => setUserMsg(e.target.value)} type="text" />
+      <button onClick={e => console.log(userMsg)}>click</button>
+      <button onClick={e => console.log(allMsg)}>click</button>
     </div>
   )
 }
