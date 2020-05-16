@@ -15,6 +15,12 @@ export default function Chat() {
   useEffect(() => {
     socket = io('http://localhost:5000/')
     console.log(socket)
+    socket.on('connect', () => {
+      socket.send('hi')
+      socket.on('message', (msg) => {
+
+      })
+    })
   }, [])
 
   return (

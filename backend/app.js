@@ -22,6 +22,11 @@ app.use((req, resp, next) => {
 io.on('connection', (socket) => {
   console.log('conntection created, user entered')
 
+  socket.on('join', () => {
+    console.log('user has joined')
+    socket.emit('msg', { msg: 'message' })
+  })
+
   socket.on('disconnect', () => {
     console.log('user has left')
   })
