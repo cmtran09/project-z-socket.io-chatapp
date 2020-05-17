@@ -5,7 +5,7 @@ import io from 'socket.io-client'
 
 let socket
 
-export default function Chat() {
+export default function Chat(props) {
 
   const [userMsg, setUserMsg] = useState('')
   const [allMsg, setAllMsg] = useState(['hwllo', 'my', 'name', 'is', 'a', 'test'])
@@ -29,9 +29,10 @@ export default function Chat() {
         hello world caht compneont
       </div>
       {allMsg.map((elem, i) => <p key={i}>{elem}</p>)}
-      <input onChange={e => setUserMsg(e.target.value)} type="text" />
+      <input onChange={e => setUserMsg(e.target.value)} type="text" placeholder="your message" />
       <button onClick={e => console.log(userMsg)}>click</button>
       <button onClick={e => console.log(allMsg)}>click</button>
+      <button onClick={e => console.log(props.location.props.username)}>props</button>
     </div>
   )
 }
