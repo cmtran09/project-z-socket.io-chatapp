@@ -10,7 +10,7 @@ export default function Home() {
     <div>
       hello home
       <input onChange={e => setUser(e.target.value)} type="text" placeholder="your username" />
-      <Link to={
+      <Link onClick={e => !user ? e.preventDefault() : null} to={
         {
           pathname: '/chat',
           props: { 'username': user }
