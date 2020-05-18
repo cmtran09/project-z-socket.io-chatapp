@@ -10,17 +10,22 @@ export default function Chat(props) {
   const [userMsg, setUserMsg] = useState('')
   const [allMsg, setAllMsg] = useState(['hwllo', 'my', 'name', 'is', 'a', 'test'])
 
+  let user = props.location.props.username
   console.log("hi")
 
   useEffect(() => {
     socket = io('http://localhost:5000/')
     console.log(socket)
-    socket.on('connect', () => {
-      socket.send('hi')
-      socket.on('message', (msg) => {
 
-      })
+    socket.emit('join', { user: user }, ({ error }) => {
+      alert(error)
     })
+
+    // socket.on('connect', () => {
+    //   socket.send('hi')
+    //   socket.on('message', (msg) => {
+
+    //   })
   }, [])
 
   return (

@@ -22,8 +22,14 @@ app.use((req, resp, next) => {
 io.on('connection', (socket) => {
   console.log('conntection created, user entered')
 
-  socket.on('join', () => {
-    console.log('user has joined')
+  socket.on('join', ({ user: user }, callback) => {
+    console.log(`user ${user} has joined`)
+
+    const error = true;
+
+    if (error) {
+      callback({ error: 'error' })
+    }
     socket.emit('msg', { msg: 'message' })
   })
 
