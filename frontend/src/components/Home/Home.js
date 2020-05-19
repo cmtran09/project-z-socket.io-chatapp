@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 export default function Home() {
 
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState({ room: 'chatroom' })
 
   return (
     <div>
@@ -13,10 +13,14 @@ export default function Home() {
       <Link onClick={e => !user ? e.preventDefault() : null} to={
         {
           pathname: '/chat',
-          props: { 'username': user }
+          props: {
+            'userName': user,
+            'room': 'chatroom'
+          }
         }
       }>
         <button>join</button>
+        <button onClick={e => console.log(user)}>log</button>
       </Link>
     </div>
   )
