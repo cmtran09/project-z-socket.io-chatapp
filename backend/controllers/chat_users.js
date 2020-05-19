@@ -29,8 +29,13 @@ const findUser = (id) => users.find(user => user.id === id)
 
 const removeUser = (id) => {
   const index = users.findIndex(user => user.id === id)
-  if (index) {
-    return users.splice(index, 1)[0]
+  console.log(index)
+  if (index !== -1) {
+    (console.log('logging', users.splice(index, 1)[0]))
+    return (
+      users.splice(index, 1)[0];
+    console.log('hi')
+    )
   }
 }
 

@@ -9,7 +9,9 @@ export default function Home() {
   return (
     <div>
       hello home
-      <input onChange={e => setUser(e.target.value)} type="text" placeholder="your username" />
+      <input
+        onChange={e => setUser(e.target.value)} type="text" placeholder="your username"
+      />
       <Link onClick={e => !user ? e.preventDefault() : null} to={
         {
           pathname: '/chat',

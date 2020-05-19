@@ -52,8 +52,11 @@ io.on('connection', (socket) => {
     callback()
   })
 
-  socket.on('disconnect', () => {
-    console.log('user has left')
+  socket.on('disconnect', (room) => {
+    const currentUser = removeUser(socket.id)
+    // if (currentUser) {
+    //   io.to(room).emit('msg', { username: 'chat admin', message: `${user.username} has left.` });
+    // }
   })
 })
 
