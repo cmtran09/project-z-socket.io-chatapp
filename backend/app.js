@@ -26,12 +26,13 @@ app.use((req, resp, next) => {
 io.on('connection', (socket) => {
   console.log('conntection created, user entered')
 
-  socket.on('join', ({ name, room }, callback) => {
-    console.log(`user ${name.user} has joined`)
-    const { error, user } = addUser({ id: socket.id, name })
-    socket.emit('msg', { user: 'chat admin', message: `Hello ${name.user} welcome to this chat room` })
+  socket.on('join', ({ newUsername, room }, callback) => {
+    console.log(`user ${newUsername} has joined`)
+    console.log(`user ROOOOOOM ${room} has joined`)
+    const { error, user } = addUser({ id: socket.id, newUsername })
+    socket.emit('msg', { user: 'chat admin', message: `Hello ${user} welcome to this chat room` })
     // broacast sends message to all other users not currnet
-    socket.broadcast.to(room).emmit('msg', { user: 'chat admin', message: `${name.user} has joined the room` })
+    // socket.broadcast.to(room).emmit('msg', { user: 'chat admin', message: `${user} has joined the room` })
 
     socket.join(room)
   })

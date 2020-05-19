@@ -8,13 +8,13 @@ let socket
 export default function Chat(props) {
 
   const [userMsg, setUserMsg] = useState('')
-  const [allMsg, setAllMsg] = useState(['hwllo', 'my', 'name', 'is', 'a', 'test'])
+  const [allMsg, setAllMsg] = useState([{ user: 'tom', message: 'hwllo' }, { user: 'tom', message: 'my' }, { user: 'tom', message: 'name' }, { user: 'tom', message: 'is' }, { user: 'tom', message: 'a' }, { user: 'tom', message: 'test' }])
   // const [userName, setUserName] = useState('')
 
-  let user = props.location.props.userName
+  let newUsername = props.location.props.userName
   let room = props.location.props.room
   console.log(props)
-  console.log(user)
+  console.log(newUsername)
   console.log(room)
   // console.log('username', userName)
 
@@ -23,7 +23,7 @@ export default function Chat(props) {
     socket = io('http://localhost:5000/')
     console.log(socket)
 
-    socket.emit('join', { user, room }, ({ error }) => {
+    socket.emit('join', { newUsername, room }, ({ error }) => {
       alert(error)
     })
 
@@ -60,7 +60,7 @@ export default function Chat(props) {
       <div className='main-app'>
         hello world caht compneont
       </div>
-      {allMsg.map((elem, i) => <p key={i}>{elem}</p>)}
+      {allMsg.map((elem, i) => <p key={i}>{`${elem.message}: by ${elem.user}`}</p>)}
       <input onChange={e => setUserMsg(e.target.value)} type="text" placeholder="your message" />
       <button onClick={e => sendMsg(e)}>send</button>
       <button onClick={e => console.log(userMsg)}>userMsg</button>

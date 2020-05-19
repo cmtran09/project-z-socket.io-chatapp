@@ -1,21 +1,22 @@
 const users = []
 
-const addUser = ({ id, name }) => {
+const addUser = ({ id, newUsername }) => {
 
-  console.log("cont", name)
-  console.log("cont", typeof (name))
-  // name = name.toLowerCase()
+  console.log("cont", newUsername)
+  console.log("cont", typeof (newUsername))
+  newUsername = newUsername.toLowerCase()
 
-  // const sameUser = users.find((user) => {
-  //   user.name === name
-  //   return true
-  // })
-  // if (sameUser) {
-  //   return { error: 'Username is taken' }
-  // }
+  const sameUser = users.find((user) => {
+    user.newUsername === newUsername
+    return true
+  })
+  if (sameUser) {
+    return { error: 'Username is taken' }
+  }
 
-  const user = { id, name }
+  const user = { id, user: newUsername }
   users.push(user)
+  console.log(users)
   return user
 }
 
