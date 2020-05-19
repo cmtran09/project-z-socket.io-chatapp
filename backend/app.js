@@ -16,8 +16,6 @@ const { addUser, findUser, removeUser } = require('./controllers/chat_users')
 
 const router = require('./config/router')
 
-const room = 'chatroom'
-
 app.use((req, resp, next) => {
   console.log(`${req.method} to ${req.url}`)
   next()
@@ -29,18 +27,27 @@ io.on('connection', (socket) => {
   socket.on('join', ({ newUsername, room }, callback) => {
     console.log(`user ${newUsername} has joined`)
     console.log(`user ROOOOOOM ${room} has joined`)
-    const { error, user } = addUser({ id: socket.id, newUsername })
-    socket.emit('msg', { user: 'chat admin', message: `Hello ${user} welcome to this chat room` })
-    // broacast sends message to all other users not currnet
-    // socket.broadcast.to(room).emmit('msg', { user: 'chat admin', message: `${user} has joined the room` })
 
+    const { error, user } = addUser({ id: socket.id, newUsername })
+
+    console.log('user obj', user)
+
+    if (error) {
+      return callback(error)
+    }
     socket.join(room)
+
+    socket.emit('msg', { username: 'chat admin', message: `Hello ${user.username} welcome to this chat room` })
+    // broacast sends message to all other users not currnet
+    socket.broadcast.to(room).emit('msg', { username: 'chat admin', message: `${user.username} has joined the room` })
+
+    callback()
   })
 
-  socket.on('sendMsg', (message, callback) => {
-    const user = findUser(socket.id)
+  socket.on('sendMsg', ({ message, room }, callback) => {
+    const currentUser = findUser(socket.id)
 
-    io.to(room).emmit('msg', { user: user.name, message: message })
+    io.to(room).emit('msg', { username: currentUser.username, message })
     // use to clear the input text area on the front end
     callback()
   })

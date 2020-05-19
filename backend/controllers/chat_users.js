@@ -4,20 +4,25 @@ const addUser = ({ id, newUsername }) => {
 
   console.log("cont", newUsername)
   console.log("cont", typeof (newUsername))
+
   newUsername = newUsername.toLowerCase()
 
-  const sameUser = users.find((user) => {
-    user.newUsername === newUsername
-    return true
-  })
+  const sameUser = users.find((user) => user.username === newUsername)
+
+  if (!newUsername) {
+    console.log('username required')
+    return { error: 'Username required' }
+  }
+
   if (sameUser) {
+    console.log('error same username')
     return { error: 'Username is taken' }
   }
 
-  const user = { id, user: newUsername }
+  const user = { id, username: newUsername }
   users.push(user)
-  console.log(users)
-  return user
+  console.log("users array", users)
+  return { user }
 }
 
 const findUser = (id) => users.find(user => user.id === id)

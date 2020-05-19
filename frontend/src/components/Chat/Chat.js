@@ -8,7 +8,7 @@ let socket
 export default function Chat(props) {
 
   const [userMsg, setUserMsg] = useState('')
-  const [allMsg, setAllMsg] = useState([{ user: 'tom', message: 'hwllo' }, { user: 'tom', message: 'my' }, { user: 'tom', message: 'name' }, { user: 'tom', message: 'is' }, { user: 'tom', message: 'a' }, { user: 'tom', message: 'test' }])
+  const [allMsg, setAllMsg] = useState([{ username: 'tom', message: 'hwllo' }, { username: 'tom', message: 'my' }, { username: 'tom', message: 'name' }, { username: 'tom', message: 'is' }, { username: 'tom', message: 'a' }, { username: 'tom', message: 'test' }])
   // const [userName, setUserName] = useState('')
 
   let newUsername = props.location.props.userName
@@ -23,8 +23,8 @@ export default function Chat(props) {
     socket = io('http://localhost:5000/')
     console.log(socket)
 
-    socket.emit('join', { newUsername, room }, ({ error }) => {
-      alert(error)
+    socket.emit('join', { newUsername, room }, (error) => {
+      console.log(error)
     })
 
     // provides disconnect when unmounting the component
@@ -49,7 +49,8 @@ export default function Chat(props) {
   const sendMsg = (e) => {
     e.preventDefault()
     if (userMsg) {
-      socket.emit('sendMsg', userMsg, () => setUserMsg(''))
+      console.log('userMsg', userMsg)
+      socket.emit('sendMsg', { message: userMsg, room }, () => setUserMsg(''))
     }
   }
 
@@ -60,8 +61,11 @@ export default function Chat(props) {
       <div className='main-app'>
         hello world caht compneont
       </div>
-      {allMsg.map((elem, i) => <p key={i}>{`${elem.message}: by ${elem.user}`}</p>)}
-      <input onChange={e => setUserMsg(e.target.value)} type="text" placeholder="your message" />
+      {allMsg.map((elem, i) => <p key={i}>{`${elem.message}: by ${elem.username}`}</p>)}
+      <input
+        onChange={e => setUserMsg(e.target.value)} type="text" placeholder="your message" value={userMsg}
+        onKeyPress={e => e.key === 'Enter' ? sendMsg(e) : null}
+      />
       <button onClick={e => sendMsg(e)}>send</button>
       <button onClick={e => console.log(userMsg)}>userMsg</button>
       <button onClick={e => console.log(allMsg)}>allMsg</button>
