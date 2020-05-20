@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
     socket.emit('msg', { username: 'chat admin', message: `Hello ${user.username} welcome to this chat room` })
     // broacast sends message to all other users not currnet
     socket.broadcast.to(room).emit('msg', { username: 'chat admin', message: `${user.username} has joined the room` })
-
+    // update the front with new current useres array when new person enters
     socket.emit('getAllUsers', { users: getAllUsers() })
 
     callback()
@@ -64,6 +64,8 @@ io.on('connection', (socket) => {
     // if (currentUser) {
     //   io.to(room).emit('msg', { username: 'chat admin', message: `${user.username} has left.` });
     // }
+
+    // update the front with new current useres array when person leaves
     socket.emit('getAllUsers', { users: getAllUsers() })
   })
 })
