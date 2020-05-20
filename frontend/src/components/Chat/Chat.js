@@ -11,6 +11,8 @@ export default function Chat(props) {
   const [allMsg, setAllMsg] = useState([{ username: 'tom', message: 'hwllo' }, { username: 'tom', message: 'my' }, { username: 'tom', message: 'name' }, { username: 'tom', message: 'is' }, { username: 'tom', message: 'a' }, { username: 'tom', message: 'test' }])
   // const [userName, setUserName] = useState('')
 
+  // const [allInRoom, setAllInRoom] = useState = ('')
+
   let newUsername = props.location.props.userName
   let room = props.location.props.room
   console.log(props)
@@ -32,11 +34,6 @@ export default function Chat(props) {
       socket.emit('disconnect')
       socket.off()
     }
-    // socket.on('connect', () => {
-    //   socket.send('hi')
-    //   socket.on('message', (msg) => {
-
-    //   })
   }, [])
 
   useEffect(() => {
@@ -44,6 +41,12 @@ export default function Chat(props) {
       setAllMsg([...allMsg, userMsg])
     })
   }, [allMsg])
+
+  // useEffect(() => {
+  //   socket.on('msg', (userMsg) => {
+  //     setAllInRoom([...allInRoom, userMsg])
+  //   })
+  // }, [allInRoom])
 
   //a functiont to send a user Message using the 'sendMsg' event on the back
   const sendMsg = (e) => {

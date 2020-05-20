@@ -29,18 +29,23 @@ const findUser = (id) => users.find(user => user.id === id)
 
 const removeUser = (id) => {
   const index = users.findIndex(user => user.id === id)
-  console.log(index)
+  console.log("remove user index:", index)
   if (index !== -1) {
-    (console.log('logging', users.splice(index, 1)[0]))
+    console.log('logging users array before splice', users)
+    // console.log('logging the spliced element', users.splice(index, 1))
+    // console.log('logging the spliced []with [0]', users.splice(index, 1)[0])
     return (
-      users.splice(index, 1)[0];
-    console.log('hi')
+      users.splice(index, 1)[0]
+
     )
   }
 }
 
+const getAllUsers = () => users
+
 module.exports = {
   addUser,
   findUser,
+  getAllUsers,
   removeUser
 }

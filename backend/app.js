@@ -9,7 +9,7 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
-const { addUser, findUser, removeUser } = require('./controllers/chat_users')
+const { addUser, findUser, removeUser, getAllUsers } = require('./controllers/chat_users')
 
 // const path = require('path')
 // const dist = path.join(__dirname, '../dist')
@@ -51,6 +51,11 @@ io.on('connection', (socket) => {
     // use to clear the input text area on the front end
     callback()
   })
+
+  // socket.on('getAllUsers'), () => {
+  //   console.log('get all useres app.js :', getAllUsers())
+  //   return getAllUsers()
+  // }
 
   socket.on('disconnect', (room) => {
     const currentUser = removeUser(socket.id)
