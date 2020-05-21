@@ -9,7 +9,7 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
-const { addUser, findUser, removeUser, getAllUsers } = require('./controllers/chat_users')
+const { addUser, findUser, removeUser, getAllUsers, updateLastActive } = require('./controllers/chat_users')
 
 // const path = require('path')
 // const dist = path.join(__dirname, '../dist')
@@ -50,6 +50,10 @@ io.on('connection', (socket) => {
   socket.on('sendMsg', ({ message, room }, callback) => {
     const currentUser = findUser(socket.id)
 
+    // update users current last currently active time and send to front
+    updateLastActive(currentUser)
+    io.to(room).emit('getAllUsers', { users: getAllUsers() })
+
     io.to(room).emit('msg', { username: currentUser.username, message })
     // use to clear the input text area on the front end
     callback()
@@ -67,9 +71,9 @@ io.on('connection', (socket) => {
     // }
 
     // update the front with new current users array when another person leaves (different id)
-    if(currentUser){
-      console.log("CURRENT USER DISCO",currentUser)
-      
+    if (currentUser) {
+      console.log("CURRENT USER DISCO", currentUser)
+
       socket.broadcast.emit('msg', { username: 'chat admin', message: `${currentUser.username} has left the room` })
       socket.broadcast.emit('getAllUsers', { users: getAllUsers() })
     }
