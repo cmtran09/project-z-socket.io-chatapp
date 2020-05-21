@@ -9,19 +9,12 @@ export default function Chat(props) {
 
   const [userMsg, setUserMsg] = useState('')
   const [allMsg, setAllMsg] = useState([{ username: 'tom', message: 'hello' }, { username: 'tom', message: 'my' }, { username: 'tom', message: 'name' }, { username: 'tom', message: 'is' }, { username: 'tom', message: 'a' }, { username: 'tom', message: 'test' }])
-  // const [userName, setUserName] = useState('')
-
   const [allInRoom, setAllInRoom] = useState('')
 
   let newUsername = props.location.props.userName
   let room = props.location.props.room
-  console.log(props)
-  console.log(newUsername)
-  console.log(room)
-  // console.log('username', userName)
 
   useEffect(() => {
-    // setUserName(user)
     socket = io('http://localhost:5000/')
     console.log(socket)
 
@@ -71,6 +64,10 @@ export default function Chat(props) {
       <button onClick={e => sendMsg(e)}>send</button>
       <button onClick={() => console.log(userMsg)}>userMsg</button>
       <button onClick={() => console.log(allMsg)}>allMsg</button>
+      <button onClick={() => console.log(allInRoom)}>allInRoom</button>
+
+      <button onClick={() => allInRoom[0].label = 'red'}>allInRoom change</button>
+
       <button onClick={() => console.log(allInRoom)}>allInRoom</button>
       <button onClick={() => console.log(props.location.props.username)}>props</button>
       <h1>users</h1>

@@ -59,16 +59,8 @@ io.on('connection', (socket) => {
     callback()
   })
 
-  // socket.on('getAllUsers'), () => {
-  //   console.log('get all users app.js :', getAllUsers())
-  //   return getAllUsers()
-  // }
-
   socket.on('disconnect', () => {
     const currentUser = removeUser(socket.id)
-    // if (currentUser) {
-    //   io.to(room).emit('msg', { username: 'chat admin', message: `${user.username} has left.` });
-    // }
 
     // update the front with new current users array when another person leaves (different id)
     if (currentUser) {
