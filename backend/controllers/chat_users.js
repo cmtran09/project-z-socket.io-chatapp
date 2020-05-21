@@ -1,3 +1,4 @@
+const moment = require('moment')
 const users = []
 
 const addUser = ({ id, newUsername }) => {
@@ -19,7 +20,7 @@ const addUser = ({ id, newUsername }) => {
     return { error: 'Username is taken' }
   }
 
-  const user = { id, username: newUsername }
+  const user = { id, username: newUsername, timeJoined: moment().format('DD MM YYYY HH:mm:ss'), lastActive: moment().format('DD MM YYYY HH:mm:ss') }
   users.push(user)
   console.log("users array", users)
   return { user }

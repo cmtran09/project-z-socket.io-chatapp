@@ -27,6 +27,7 @@ export default function Chat(props) {
 
     socket.emit('join', { newUsername, room }, (error) => {
       console.log(error)
+      alert(error)
     })
 
     // provides disconnect when unmounting the component
