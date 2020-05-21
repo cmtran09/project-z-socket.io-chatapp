@@ -37,7 +37,6 @@ const removeUser = (id) => {
     // console.log('logging the spliced []with [0]', users.splice(index, 1)[0])
     return (
       users.splice(index, 1)[0]
-
     )
   }
 }

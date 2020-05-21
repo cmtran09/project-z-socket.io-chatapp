@@ -35,13 +35,14 @@ io.on('connection', (socket) => {
     if (error) {
       return callback(error)
     }
+
     socket.join(room)
 
     socket.emit('msg', { username: 'chat admin', message: `Hello ${user.username} welcome to this chat room` })
-    // broacast sends message to all other users not currnet
+    // broadcast sends message to all other users not current
     socket.broadcast.to(room).emit('msg', { username: 'chat admin', message: `${user.username} has joined the room` })
-    // update the front with new current useres array when new person enters
-    socket.emit('getAllUsers', { users: getAllUsers() })
+    // update the front with new current users array when new person enters
+    io.to(room).emit('getAllUsers', { users: getAllUsers() })
 
     callback()
   })
@@ -55,18 +56,23 @@ io.on('connection', (socket) => {
   })
 
   // socket.on('getAllUsers'), () => {
-  //   console.log('get all useres app.js :', getAllUsers())
+  //   console.log('get all users app.js :', getAllUsers())
   //   return getAllUsers()
   // }
 
-  socket.on('disconnect', (room) => {
+  socket.on('disconnect', () => {
     const currentUser = removeUser(socket.id)
     // if (currentUser) {
     //   io.to(room).emit('msg', { username: 'chat admin', message: `${user.username} has left.` });
     // }
 
-    // update the front with new current useres array when person leaves
-    socket.emit('getAllUsers', { users: getAllUsers() })
+    // update the front with new current users array when another person leaves (different id)
+    if(currentUser){
+      console.log("CURRENT USER DISCO",currentUser)
+      
+      socket.broadcast.emit('msg', { username: 'chat admin', message: `${currentUser.username} has left the room` })
+      socket.broadcast.emit('getAllUsers', { users: getAllUsers() })
+    }
   })
 })
 
