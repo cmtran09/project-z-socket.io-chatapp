@@ -30,8 +30,6 @@ io.on('connection', (socket) => {
 
     const { error, user } = addUser({ id: socket.id, newUsername })
 
-    console.log('user obj', user)
-
     if (error) {
       return callback(error)
     }

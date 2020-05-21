@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import '../../styles/styles.scss'
+import moment from 'moment'
 
 import io from 'socket.io-client'
 
@@ -51,6 +52,25 @@ export default function Chat(props) {
     }
   }
 
+  const availibilty = (lastActive) => {
+    const currentTime = moment().format('DD MM YYYY HH:mm:ss')
+    console.log("lasldsjkashsdjhfgasjkhdgfkjhasgdfkjhasgdkjfhagsjkdhfgajkhsdg")
+    console.log('lastActive', lastActive)
+    console.log('currentTime', currentTime)
+    console.log("==============================")
+
+    const ms = moment(currentTime, 'DD MM YYYY HH:mm:ss').diff(moment(lastActive, 'DD MM YYYY HH:mm:ss'))
+    const duration = moment.duration(ms);
+
+    if (duration._data.seconds > 15) {
+      console.log('longer than 30 seconds')
+      return 'red'
+    } else return 'green'
+    // console.log('result ddddd', duration._data.seconds)
+
+    // console.log('result', s)
+  }
+
   return (
     <div>
       <div className='main-app'>
@@ -71,10 +91,11 @@ export default function Chat(props) {
       <button onClick={() => console.log(allInRoom)}>allInRoom</button>
       <button onClick={() => console.log(props.location.props.username)}>props</button>
       <h1>users</h1>
+      <p>{`current time: ${moment().format('DD MM YYYY HH:mm:ss')}`}</p>
       {allInRoom &&
         allInRoom.map((elem, i) => {
           return (
-            <p key={i}>{elem.username}</p>
+            <p key={i}>{`${elem.username} last seen colour is ${availibilty(elem.lastActive)}`}</p>
           )
         })
       }
