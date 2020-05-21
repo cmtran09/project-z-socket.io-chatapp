@@ -44,6 +44,7 @@ export default function Chat(props) {
 
   useEffect(() => {
     socket.on('getAllUsers', ({ users }) => {
+      console.log('getalluseres useeffect')
       setAllInRoom(users)
     })
   }, [allInRoom])
@@ -75,7 +76,13 @@ export default function Chat(props) {
       <button onClick={e => console.log(allInRoom)}>allInRoom</button>
       <button onClick={e => console.log(props.location.props.username)}>props</button>
       <h1>useres</h1>
-      {/* {allInRoom.map((elem, i) => <p key={i}>{`${elem.message}: by ${elem.username}`}</p>)} */}
+      {allInRoom &&
+        allInRoom.map((elem, i) => {
+          return (
+            <p key={i}>{elem.username}</p>
+          )
+        })
+      }
     </div>
   )
 }
