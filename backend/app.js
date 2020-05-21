@@ -57,6 +57,16 @@ io.on('connection', (socket) => {
     callback()
   })
 
+  // update users activity every 15 seconds
+  const updateUserInterval = () => {
+    console.log('hibross')
+    socket.broadcast.emit('getAllUsers', { users: getAllUsers() })
+  }
+  const availibiltyInterval = setInterval(
+    updateUserInterval
+    , 5000)
+
+
   socket.on('disconnect', () => {
     const currentUser = removeUser(socket.id)
 

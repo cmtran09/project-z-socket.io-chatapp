@@ -54,11 +54,6 @@ export default function Chat(props) {
 
   const availibilty = (lastActive) => {
     const currentTime = moment().format('DD MM YYYY HH:mm:ss')
-    console.log("lasldsjkashsdjhfgasjkhdgfkjhasgdfkjhasgdkjfhagsjkdhfgajkhsdg")
-    console.log('lastActive', lastActive)
-    console.log('currentTime', currentTime)
-    console.log("==============================")
-
     const ms = moment(currentTime, 'DD MM YYYY HH:mm:ss').diff(moment(lastActive, 'DD MM YYYY HH:mm:ss'))
     const duration = moment.duration(ms);
 
@@ -95,7 +90,10 @@ export default function Chat(props) {
       {allInRoom &&
         allInRoom.map((elem, i) => {
           return (
-            <p key={i}>{`${elem.username} last seen colour is ${availibilty(elem.lastActive)}`}</p>
+            <div className="">
+              <p key={i}>{`${elem.username} `}</p>
+              <p>{elem.label === 'red' ? 'balloon' : elem.label === 'amber' ? 'sleep' : 'active'}</p>
+            </div>
           )
         })
       }
