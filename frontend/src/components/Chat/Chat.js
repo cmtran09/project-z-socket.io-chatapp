@@ -61,9 +61,6 @@ export default function Chat(props) {
       console.log('longer than 30 seconds')
       return 'red'
     } else return 'green'
-    // console.log('result ddddd', duration._data.seconds)
-
-    // console.log('result', s)
   }
 
   return (
@@ -90,9 +87,9 @@ export default function Chat(props) {
       {allInRoom &&
         allInRoom.map((elem, i) => {
           return (
-            <div className="">
-              <p key={i}>{`${elem.username} `}</p>
-              <p>{elem.label === 'red' ? 'balloon' : elem.label === 'amber' ? 'sleep' : 'active'}</p>
+            <div key={i} className="">
+              <p>{`${elem.username} `}</p>
+              <p>{elem.label === 'red' ? '🔴' : elem.label === 'amber' ? '🟠' : '🟢'}</p>
             </div>
           )
         })

@@ -22,26 +22,19 @@ app.use((req, resp, next) => {
 })
 
 io.on('connection', (socket) => {
-  console.log('conntection created, user entered')
+  console.log('connection created, user entered')
 
   socket.on('join', ({ newUsername, room }, callback) => {
-    console.log(`user ${newUsername} has joined`)
-    console.log(`user ROOOOOOM ${room} has joined`)
-
     const { error, user } = addUser({ id: socket.id, newUsername })
-
     if (error) {
       return callback(error)
     }
-
     socket.join(room)
-
     socket.emit('msg', { username: 'chat admin', message: `Hello ${user.username} welcome to this chat room` })
     // broadcast sends message to all other users not current
     socket.broadcast.to(room).emit('msg', { username: 'chat admin', message: `${user.username} has joined the room` })
     // update the front with new current users array when new person enters
     io.to(room).emit('getAllUsers', { users: getAllUsers() })
-
     callback()
   })
 
@@ -57,23 +50,20 @@ io.on('connection', (socket) => {
     callback()
   })
 
-  // update users activity every 15 seconds
-  const updateUserInterval = () => {
-    console.log('hibross')
+  // update users activity every 5 seconds
+  const displayUserActivity = () => {
+    socket.emit('msg', { username: 'chat admin', message: `repeat message` })
     socket.broadcast.emit('getAllUsers', { users: getAllUsers() })
+    // socket.broadcast.emit('getAllUsers', { users: getAllUsers() })
   }
-  const availibiltyInterval = setInterval(
-    updateUserInterval
+  const availabilityInterval = setInterval(
+    displayUserActivity
     , 5000)
-
 
   socket.on('disconnect', () => {
     const currentUser = removeUser(socket.id)
-
     // update the front with new current users array when another person leaves (different id)
     if (currentUser) {
-      console.log("CURRENT USER DISCO", currentUser)
-
       socket.broadcast.emit('msg', { username: 'chat admin', message: `${currentUser.username} has left the room` })
       socket.broadcast.emit('getAllUsers', { users: getAllUsers() })
     }
