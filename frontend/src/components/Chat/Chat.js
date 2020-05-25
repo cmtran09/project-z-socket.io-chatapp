@@ -82,7 +82,7 @@ export default function Chat(props) {
       <button onClick={() => allInRoom[0].label = 'red'}>allInRoom change</button>
 
       <button onClick={() => console.log(allInRoom)}>allInRoom</button>
-      <button onClick={() => console.log(props.location.props.username)}>props</button>
+      <button onClick={() => console.log(props)}>props</button>
       <h1>users</h1>
       <p>{`current time: ${moment().format('DD MM YYYY HH:mm:ss')}`}</p>
       {allInRoom &&

@@ -36,3 +36,15 @@
 .circle-picker {
   margin-left: 5px;
 }
+
+.colour-banner {
+  position: absolute; 
+  top: 30px; 
+  right: 0px; 
+  bottom: 0px; 
+  left: 0px; 
+  height: 50%;
+  background-color: white; 
+  transition: background-color 100ms linear 0s; 
+  opacity: 0.5;
+}

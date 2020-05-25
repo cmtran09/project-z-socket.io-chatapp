@@ -52,10 +52,10 @@ io.on('connection', (socket) => {
 
   // update users activity every 5 seconds
   const displayUserActivity = () => {
-    socket.emit('msg', { username: 'chat admin', message: `repeat message` })
     socket.broadcast.emit('getAllUsers', { users: getAllUsers() })
     // socket.broadcast.emit('getAllUsers', { users: getAllUsers() })
   }
+
   const availabilityInterval = setInterval(
     displayUserActivity
     , 5000)
