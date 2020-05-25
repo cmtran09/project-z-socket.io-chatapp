@@ -42,7 +42,7 @@ const setAvailibilty = () => {
   })
 }
 
-const availibitlyInterval = setInterval(
+const availabilityInterval = setInterval(
   setAvailibilty
   , 10000
 )

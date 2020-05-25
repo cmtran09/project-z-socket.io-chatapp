@@ -14,6 +14,7 @@ export default function Chat(props) {
 
   let newUsername = props.location.props.userName
   let room = props.location.props.room
+  let colour = props.location.props.colour
 
   useEffect(() => {
     socket = io('http://localhost:5000/')
