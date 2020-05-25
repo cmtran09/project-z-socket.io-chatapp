@@ -48,8 +48,8 @@ export default function Home() {
           <Form size='large' >
             <Segment stacked>
               <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' onChange={e => {
-                clearErrors()
                 setUser(e.target.value)
+                clearErrors()
               }} />
               {noUser && <Message
                 color='brown'
