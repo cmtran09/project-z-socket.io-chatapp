@@ -1,25 +1,22 @@
 import React from 'react'
 
-import { Button, Image, Form, Header, Grid, List, Container, Message, Segment, Divider, TextArea, Input } from 'semantic-ui-react'
+import { Button, Form, Grid } from 'semantic-ui-react'
 import './ChatForm.scss'
 
-export default function ChatForm() {
+export default function ChatForm({ userMsg, setUserMsg, sendMsg }) {
   return (
     <Grid.Row>
       <Grid.Column>
-        <Grid>
-          <Grid.Column>
-            <Form.Input
-              focus
-              widths='equal'
-              placeholder='Your Message'
+        <Form >
+          <Form.Group unstackable widths='equal'>
+            <Form.Input focus className='left-input' fluid placeholder='Your Message'
+              onChange={e => setUserMsg(e.target.value)} type="text" placeholder="Your Message" value={userMsg}
+              onKeyPress={e => e.key === 'Enter' ? sendMsg(e) : null}
             />
-          </Grid.Column>
-          <Grid.Column>
-            <Button color='green'>Send</Button>
-          </Grid.Column>
-        </Grid>
+            <Button className='send-button' color='green' onClick={e => sendMsg(e)}>Send</Button>
+          </Form.Group>
+        </Form>
       </Grid.Column>
-    </Grid.Row>
+    </Grid.Row >
   )
 }

@@ -1,33 +1,39 @@
 import React from 'react'
 import './Users.scss'
-import { Button, Image, Form, Header, Grid, List, Container, Message, Segment, Divider, TextArea, Input } from 'semantic-ui-react'
+import { Button, Popup, Image, Form, Header, Grid, List, Container, Message, Segment, Divider, TextArea, Input } from 'semantic-ui-react'
 
+import moment from 'moment'
 
 export default function Users({ allInRoom }) {
+
+  // add function to calculate time last active in seconds on hover
+
   return (
-    <Grid.Column
-      width={4}
-    >
-      <Segment>
-        <Header as='h4' color='teal' textAlign='center'>
-          current members hs
-      </Header>
-        <List animated verticalAlign='middle'>
-          {allInRoom &&
-            allInRoom.map((elem, i) => {
-              return (
-                <List.Item key={i} className="">
-                  <List.Content>
-                    <List.Header>{`${elem.username} `}</List.Header>
-                    <p>{elem.label === 'red' ? '🔴' : elem.label === 'amber' ? '🟠' : '🟢'}</p>
-                  </List.Content>
-                </List.Item>
-              )
-            })
-          }
-        </List>
-      </Segment>
-    </Grid.Column>
-            </Grid >
+    <Segment>
+      {/* <Header as='p' color='teal' textAlign='center'> */}
+      <p>Users In Room</p>
+      {/* </Header> */}
+      <List animated verticalAlign='middle'>
+        {allInRoom &&
+          allInRoom.map((elem, i) => {
+            return (
+              <Popup
+                key={i}
+                trigger={
+                  <List.Item className="">
+                    <List.Content>
+                      <List.Header>{`${elem.username} `}{elem.label === 'red' ? '🔴' : elem.label === 'amber' ? '🟠' : '🟢'}</List.Header>
+                    </List.Content>
+                  </List.Item>
+                }>
+                <Popup.Header>Last Active: {elem.lastActive}</Popup.Header>
+                <Popup.Content>
+                </Popup.Content>
+              </Popup>
+            )
+          })
+        }
+      </List>
+    </Segment>
   )
 }

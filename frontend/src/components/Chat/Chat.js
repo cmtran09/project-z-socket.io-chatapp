@@ -5,6 +5,8 @@ import moment from 'moment'
 
 import io from 'socket.io-client'
 
+import './Chat.scss'
+
 import Users from '../Users/Users'
 import ChatContent from '../ChatContent/ChatContent'
 import ChatForm from '../ChatForm/ChatForm'
@@ -61,17 +63,6 @@ export default function Chat(props) {
     }
   }
 
-  const availibilty = (lastActive) => {
-    const currentTime = moment().format('DD MM YYYY HH:mm:ss')
-    const ms = moment(currentTime, 'DD MM YYYY HH:mm:ss').diff(moment(lastActive, 'DD MM YYYY HH:mm:ss'))
-    const duration = moment.duration(ms);
-
-    if (duration._data.seconds > 15) {
-      console.log('longer than 30 seconds')
-      return 'red'
-    } else return 'green'
-  }
-
   return (
     <div>
       <div
@@ -92,15 +83,15 @@ export default function Chat(props) {
             <Header as='h4' color='teal' textAlign='center'>
               Built using Socket.io, Node.js, Express and React
             </Header>
-            <Grid stackable columns={2}>
+            <Grid className='wrapper' stackable columns={2}>
               <Grid.Column width={12}>
                 <Segment>
                   <Grid padded >
                     <Grid.Row >
-                      <Grid.Column>Chat Room Messages</Grid.Column>
+                      <Grid.Column><p>Chat Room Messages</p></Grid.Column>
                     </Grid.Row>
-                    <ChatContent />
-                    <ChatForm />
+                    <ChatContent allMsg={allMsg} />
+                    <ChatForm userMsg={userMsg} setUserMsg={setUserMsg} sendMsg={sendMsg} />
                   </Grid>
                 </Segment>
               </Grid.Column>
