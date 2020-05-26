@@ -6,9 +6,9 @@ export default function EveryonesElsesBubble({ message }) {
   return (
     <blockquote
       class="speech-bubble"
-      style={{ color: 'red' }}
+    // style={{ color: 'red' }}
     >
-      <p>{message.message}</p>
+      <p className='bubble-text'>{message.message}</p>
       <cite>{message.username}</cite>
     </blockquote>
   )

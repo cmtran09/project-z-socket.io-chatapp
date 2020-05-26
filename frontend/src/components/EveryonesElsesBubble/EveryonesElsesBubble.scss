@@ -1,18 +1,21 @@
 .speech-bubble {
   filter: drop-shadow(-1px -1px 2px rgba(black, .10)) drop-shadow(1px 2px 2px rgba(black, .15));
   margin: 1rem;
-  margin-bottom: 5px;
-  padding: 1.5rem 2rem;
+  // margin-bottom: 500px;
+  padding: 10px 10px;
+  border-radius: 3px;
   position: relative;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 12px;
-  font-weight: 400;
+  // font-weight: 400;
   background: grey;
+  margin-block-end:0;
   // color: $bubble-color;
 }
 
 .speech-bubble cite {
   position: absolute;
+  margin-bottom: 500px;
   bottom: -2rem;
   left: 2rem;
   font-size: 12px;
@@ -21,3 +24,7 @@
   letter-spacing: 0.5px;
   color: black;
 }
+
+// p.bubble-text {
+//   margin: 0;
+// }

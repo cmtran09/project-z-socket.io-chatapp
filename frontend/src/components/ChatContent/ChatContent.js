@@ -22,7 +22,7 @@ export default function ChatContent({ allMsg }) {
             return (
               <div key={i} className="">
                 <EveryonesElsesBubble message={elem} />
-                <p key={i}>{`${elem.message}: by ${elem.username}`}</p>
+                {/* <p key={i}>{`${elem.message}: by ${elem.username}`}</p> */}
               </div>
             )
           })}
