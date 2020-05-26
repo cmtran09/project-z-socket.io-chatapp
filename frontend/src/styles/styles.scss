@@ -1,4 +1,4 @@
-// $primary-color: white;
+//.$primary-color: white;
 // $bg: black;
 // h1 {
 //   color: $primary-color;
@@ -47,4 +47,21 @@
   background-color: white; 
   transition: background-color 100ms linear 0s; 
   opacity: 0.5;
+}
+
+.ui.stacked.segment {
+  min-width: 400px;
+}
+
+.ui.segment.left {
+  width: 60px;
+}
+
+.ui.justified.container.contents {
+  // width: 100px;
+}
+
+.ui.green.button {
+  width: 100px;
+  float: right;
 }

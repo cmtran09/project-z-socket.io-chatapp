@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom"
 import { Button, Form, Grid, Header, Container, Message, Segment, Divider } from 'semantic-ui-react'
-import { SketchPicker, TwitterPicker, CirclePicker } from 'react-color'
+import { CirclePicker } from 'react-color'
 
 
 export default function Home() {
