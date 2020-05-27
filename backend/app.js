@@ -12,8 +12,8 @@ const io = socketio(server)
 
 const { addUser, findUser, removeUser, getAllUsers, updateLastActive } = require('./controllers/chat_users')
 
-// const path = require('path')
-// const dist = path.join(__dirname, '../dist')
+const path = require('path')
+const dist = path.join(__dirname, '../dist')
 
 const router = require('./config/router')
 
@@ -74,11 +74,11 @@ io.on('connection', (socket) => {
 app.use('/', router)
 
 // for deployment
-// app.use('/', express.static(dist))
+app.use('/', express.static(dist))
 
 // for deployment
-// app.get('*', function(req, res) {
-//   res.sendFile(path.join(dist, 'index.html'))
-// });
+app.get('*', function(req, res) {
+  res.sendFile(path.join(dist, 'index.html'))
+});
 
 server.listen(PORT, () => console.log(`Server up and running on port ${PORT}`))
