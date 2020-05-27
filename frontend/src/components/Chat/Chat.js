@@ -10,6 +10,7 @@ import './Chat.scss'
 import Users from '../Users/Users'
 import ChatContent from '../ChatContent/ChatContent'
 import ChatForm from '../ChatForm/ChatForm'
+import ChatRoomHeader from '../ChatRoomHeader/ChatRoomHeader'
 
 let socket
 
@@ -75,14 +76,9 @@ export default function Chat(props) {
       <Grid textAlign='center' style={{ height: '100vh', minWidth: 380, }} verticalAlign='middle'>
         <Grid.Column
           width={9}
-          style={{ maxHieght: 700, maxWidth: 1000, minWidth: 380, mixWidth: 900, }}>
+          style={{ maxHeight: 700, maxWidth: 1000, minWidth: 380, mixWidth: 900, }}>
           <Segment stacked>
-            <Header as='h2' color='teal' textAlign='center'>
-              A Simple Chat Room
-            </Header>
-            <Header as='h4' color='teal' textAlign='center'>
-              Built using Socket.io, Node.js, Express and React
-            </Header>
+            <ChatRoomHeader />
             <Grid className='wrapper' stackable columns={2}>
               <Grid.Column width={12}>
                 <Segment>

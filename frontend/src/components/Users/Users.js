@@ -36,7 +36,7 @@ export default function Users({ allInRoom }) {
         <div className='key-wrapper'>
           <p className='key-info'>🔴 Inactive for a minute</p>
           <p className='key-info'>🟠 Inactive for 30 seconds</p>
-          <p className='key-info'>🟢 Active within in 30seconds</p>
+          <p className='key-info'>🟢 Active in last 30seconds</p>
         </div>
       </List>
     </Segment>

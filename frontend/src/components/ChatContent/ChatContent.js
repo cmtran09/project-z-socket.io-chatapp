@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import ScrollToBottom from 'react-scroll-to-bottom'
 
 import { Button, Image, Form, Header, Grid, List, Container, Message, Segment, Divider, TextArea, Input } from 'semantic-ui-react'
 import './ChatContent.scss'
@@ -9,10 +10,15 @@ import AdminBubble from '../AdminBubble/AdminBubble'
 
 export default function ChatContent({ allMsg, currentUser }) {
   console.log('currentUser', currentUser)
+
+  useEffect(() => {
+
+  }, [])
+
   return (
     <Grid.Row >
       <Grid.Column>
-        <Container
+        <ScrollToBottom
           style={{
             overflow: 'auto',
             maxHeight: 300
@@ -35,7 +41,7 @@ export default function ChatContent({ allMsg, currentUser }) {
               )
             }
           })}
-        </Container>
+        </ScrollToBottom>
       </Grid.Column>
     </Grid.Row>
   )
