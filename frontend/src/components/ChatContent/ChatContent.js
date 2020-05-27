@@ -9,20 +9,14 @@ import UserBubble from '../UserBubble/UserBubble'
 import AdminBubble from '../AdminBubble/AdminBubble'
 
 export default function ChatContent({ allMsg, currentUser }) {
-  console.log('currentUser', currentUser)
-
-  useEffect(() => {
-
-  }, [])
-
   return (
     <Grid.Row >
       <Grid.Column>
         <ScrollToBottom
+          scrollViewClassName='contents'
           style={{
             maxheight: 300
           }}
-          className="contents"
           textAlign='justified'>
           {allMsg.map((elem, i) => {
             console.log('elem.username', elem.username)
