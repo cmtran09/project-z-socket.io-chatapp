@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
   })
 })
 
-app.use('/', router)
+// app.use('/', router)
 
 // for deployment
 app.use('/', express.static(dist))

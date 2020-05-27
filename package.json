@@ -2,7 +2,7 @@
   "name": "project-z-text-translate",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/cmtran09/project-z-text-translate.git",
+  "repository": "https://github.com/cmtran09/project-z-socket.io-chatapp.git",
   "author": "cmtran09 <cmtran@hotmail.co.uk>",
   "license": "MIT",
   "scripts": {
