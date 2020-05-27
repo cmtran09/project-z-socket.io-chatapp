@@ -41,12 +41,12 @@ export default function Chat(props) {
   ])
   const [allInRoom, setAllInRoom] = useState('')
 
-  // let newUsername = props.location.props.userName
-  // let room = props.location.props.room
-  // let colour = props.location.props.colour
-  let newUsername = 'cuong'
-  let room = 'chatroom'
-  let colour = 'purple'
+  let newUsername = props.location.props.userName
+  let room = props.location.props.room
+  let colour = props.location.props.colour
+  // let newUsername = 'cuong'
+  // let room = 'chatroom'
+  // let colour = 'purple'
 
   useEffect(() => {
     socket = io('http://localhost:5000/')
@@ -58,9 +58,6 @@ export default function Chat(props) {
         alert(error)
       }
     })
-
-    //set interval function that maps through the dummy messages array and emmits each element of this array to chatroom
-    socket.emit('sendMsg', { message: 'test dummy', room, colour: "blue" }, () => { })
 
     // provides disconnect when unmounting the component
     // return () => {
@@ -122,15 +119,6 @@ export default function Chat(props) {
           </Segment>
         </Grid.Column >
       </Grid >
-      <button onClick={e => sendMsg(e)}>send</button>
-      <button onClick={() => console.log(userMsg)}>userMsg</button>
-      <button onClick={() => console.log(allMsg)}>allMsg</button>
-      <button onClick={() => console.log(allInRoom)}>allInRoom</button>
-
-      <button onClick={() => allInRoom[0].label = 'red'}>allInRoom change</button>
-
-      <button onClick={() => console.log(allInRoom)}>allInRoom</button>
-      <button onClick={() => console.log(props)}>props</button>
     </div >
   )
 }
