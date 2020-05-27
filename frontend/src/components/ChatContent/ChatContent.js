@@ -20,8 +20,7 @@ export default function ChatContent({ allMsg, currentUser }) {
       <Grid.Column>
         <ScrollToBottom
           style={{
-            overflow: 'auto',
-            maxHeight: 300
+            maxheight: 300
           }}
           className="contents"
           textAlign='justified'>

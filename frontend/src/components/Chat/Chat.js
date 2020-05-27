@@ -14,10 +14,31 @@ import ChatRoomHeader from '../ChatRoomHeader/ChatRoomHeader'
 
 let socket
 
+const dummyMessagesTime = (mins) => {
+  return moment().subtract(mins, 'minutes').format('HH:mm:ss')
+}
+
 export default function Chat(props) {
 
+  const dummyUser1 = 'Bam'
+  const dummyColour1 = 'Orange'
+  const dummyUser2 = 'Dion'
+  const dummyColour2 = 'mediumturquoise'
+
   const [userMsg, setUserMsg] = useState('')
-  const [allMsg, setAllMsg] = useState([{ username: 'tom', message: 'hello', colour: 'grey', timeSent: '123123' }, { username: 'tom', message: 'my', colour: 'grey', timeSent: '123123' }, { username: 'tom', message: 'name', colour: 'grey', timeSent: '123123' }, { username: 'ROMm', message: 'is', colour: 'pink', timeSent: '123123' }, { username: 'tom', message: 'a', colour: 'grey', timeSent: '123123' }, { username: 'tom', message: 'test', colour: 'grey', timeSent: '123123' }])
+  const [allMsg, setAllMsg] = useState([
+    { username: 'chat admin', message: `${dummyUser1} has entered the room`, timeSent: dummyMessagesTime(5) },
+    { username: dummyUser1, message: 'Hello every one!!', colour: dummyColour1, timeSent: dummyMessagesTime(5) },
+    { username: 'chat admin', message: `${dummyUser2} has entered the room`, timeSent: dummyMessagesTime(5) },
+    { username: dummyUser1, message: 'I just played tetris :D', colour: dummyColour1, timeSent: dummyMessagesTime(5) },
+    { username: dummyUser2, message: 'HI!', colour: dummyColour2, timeSent: dummyMessagesTime(4) },
+    { username: dummyUser1, message: 'HI! DION!', colour: dummyColour1, timeSent: dummyMessagesTime(3) },
+    { username: dummyUser2, message: `Im bad at tetris, haven't played in ages`, colour: dummyColour2, timeSent: dummyMessagesTime(2) },
+    { username: dummyUser1, message: 'Go play it here you will have and a-Moooozing time, https://cmtran09.github.io/project-1-vanillaJS-tetris/', colour: dummyColour1, timeSent: dummyMessagesTime(1) },
+    { username: dummyUser2, message: `I'LL DO THAT RIGHT NOW`, colour: dummyColour2, timeSent: dummyMessagesTime(4) },
+    { username: 'chat admin', message: `${dummyUser2} has left the room`, timeSent: dummyMessagesTime(1) },
+    { username: 'chat admin', message: `${dummyUser1} has left the room`, timeSent: dummyMessagesTime(0) },
+  ])
   const [allInRoom, setAllInRoom] = useState('')
 
   // let newUsername = props.location.props.userName
@@ -37,6 +58,9 @@ export default function Chat(props) {
         alert(error)
       }
     })
+
+    //set interval function that maps through the dummy messages array and emmits each element of this array to chatroom
+    socket.emit('sendMsg', { message: 'test dummy', room, colour: "blue" }, () => { })
 
     // provides disconnect when unmounting the component
     // return () => {
@@ -98,12 +122,6 @@ export default function Chat(props) {
           </Segment>
         </Grid.Column >
       </Grid >
-
-      {allMsg.map((elem, i) => <p key={i}>{`${elem.message}: by ${elem.username}`}</p>)}
-      <input
-        onChange={e => setUserMsg(e.target.value)} type="text" placeholder="your message" value={userMsg}
-        onKeyPress={e => e.key === 'Enter' ? sendMsg(e) : null}
-      />
       <button onClick={e => sendMsg(e)}>send</button>
       <button onClick={() => console.log(userMsg)}>userMsg</button>
       <button onClick={() => console.log(allMsg)}>allMsg</button>
@@ -113,19 +131,6 @@ export default function Chat(props) {
 
       <button onClick={() => console.log(allInRoom)}>allInRoom</button>
       <button onClick={() => console.log(props)}>props</button>
-      <h1>users</h1>
-      <p>{`current time: ${moment().format('DD MM YYYY HH:mm:ss')}`}</p>
-      {
-        allInRoom &&
-        allInRoom.map((elem, i) => {
-          return (
-            <div key={i} className="">
-              <p>{`${elem.username} `}</p>
-              <p>{elem.label === 'red' ? '🔴' : elem.label === 'amber' ? '🟠' : '🟢'}</p>
-            </div>
-          )
-        })
-      }
     </div >
   )
 }

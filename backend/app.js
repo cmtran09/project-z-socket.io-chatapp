@@ -40,6 +40,10 @@ io.on('connection', (socket) => {
   })
 
   socket.on('sendMsg', ({ message, room }, callback) => {
+    console.log('MESSAGE', message)
+    if(message.dummy){
+      console.log('DUMMTTTYYYYYYYYY')
+    }
     const currentUser = findUser(socket.id)
 
     // update users current last currently active time and send to front
@@ -56,10 +60,6 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('getAllUsers', { users: getAllUsers() })
     // socket.broadcast.emit('getAllUsers', { users: getAllUsers() })
   }
-
-  const availabilityInterval = setInterval(
-    displayUserActivity
-    , 5000)
 
   socket.on('disconnect', () => {
     const currentUser = removeUser(socket.id)
