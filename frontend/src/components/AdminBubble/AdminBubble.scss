@@ -7,13 +7,30 @@
   position: relative;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 12px;
-  width: 90%;
   // font-weight: 400;
   // background: red;
   margin-block-end:0;
   // color: $bubble-color;
 }
 
+.admin-bubble {
+  background: 
+  /* On "top" */
+  repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    #ccc 10px,
+    #ccc 20px
+  ),
+  /* on "bottom" */
+  linear-gradient(
+    to bottom,
+    #eee,
+    #999
+  );
+  
+}
 .admin-cite {
   left: 42%
 }

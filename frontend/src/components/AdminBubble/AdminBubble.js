@@ -5,9 +5,8 @@ import './AdminBubble.scss'
 export default function AdminBubble({ message }) {
   return (
     <blockquote
-      className="speech-bubble"
+      className="speech-bubble admin-bubble"
       style={{
-        backgroundColor: 'blue',
         textAlign: 'center'
       }}
     >

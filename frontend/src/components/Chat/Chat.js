@@ -16,7 +16,7 @@ let socket
 export default function Chat(props) {
 
   const [userMsg, setUserMsg] = useState('')
-  const [allMsg, setAllMsg] = useState([{ username: 'tom', message: 'hello' }, { username: 'tom', message: 'my' }, { username: 'tom', message: 'name' }, { username: 'tom', message: 'is' }, { username: 'tom', message: 'a' }, { username: 'tom', message: 'test' }])
+  const [allMsg, setAllMsg] = useState([{ username: 'tom', message: 'hello', colour: 'grey', timeSent: '123123' }, { username: 'tom', message: 'my', colour: 'grey', timeSent: '123123' }, { username: 'tom', message: 'name', colour: 'grey', timeSent: '123123' }, { username: 'ROMm', message: 'is', colour: 'pink', timeSent: '123123' }, { username: 'tom', message: 'a', colour: 'grey', timeSent: '123123' }, { username: 'tom', message: 'test', colour: 'grey', timeSent: '123123' }])
   const [allInRoom, setAllInRoom] = useState('')
 
   // let newUsername = props.location.props.userName
@@ -30,7 +30,7 @@ export default function Chat(props) {
     socket = io('http://localhost:5000/')
     console.log(socket)
 
-    socket.emit('join', { newUsername, room }, (error) => {
+    socket.emit('join', { newUsername, room, colour }, (error) => {
       if (error) {
         console.log(error)
         alert(error)
@@ -90,7 +90,7 @@ export default function Chat(props) {
                     <Grid.Row >
                       <Grid.Column><p>Chat Room Messages</p></Grid.Column>
                     </Grid.Row>
-                    <ChatContent allMsg={allMsg} currentUser={newUsername}/>
+                    <ChatContent allMsg={allMsg} currentUser={newUsername} />
                     <ChatForm userMsg={userMsg} setUserMsg={setUserMsg} sendMsg={sendMsg} />
                   </Grid>
                 </Segment>

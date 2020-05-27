@@ -1,7 +1,7 @@
 const moment = require('moment')
 const users = []
 
-const addUser = ({ id, newUsername }) => {
+const addUser = ({ id, newUsername, colour }) => {
   newUsername = newUsername.toLowerCase()
   const sameUser = users.find((user) => user.username === newUsername)
   if (!newUsername) {
@@ -12,7 +12,7 @@ const addUser = ({ id, newUsername }) => {
     console.log('error same username')
     return { error: 'Username is taken' }
   }
-  const user = { id, username: newUsername, timeJoined: moment().format('DD MM YYYY HH:mm:ss'), lastActive: moment().format('DD MM YYYY HH:mm:ss'), label: null }
+  const user = { id, username: newUsername, colour, timeJoined: moment().format('DD MM YYYY HH:mm:ss'), lastActive: moment().format('DD MM YYYY HH:mm:ss'), label: null }
   users.push(user)
   return { user }
 }

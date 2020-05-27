@@ -1,6 +1,7 @@
 const express = require('express')
 const socketio = require('socket.io')
 const http = require('http')
+const moment = require('moment')
 
 const PORT = process.env.PORT || 5000
 
@@ -24,8 +25,8 @@ app.use((req, resp, next) => {
 io.on('connection', (socket) => {
   console.log('connection created, user entered')
 
-  socket.on('join', ({ newUsername, room }, callback) => {
-    const { error, user } = addUser({ id: socket.id, newUsername })
+  socket.on('join', ({ newUsername, room, colour }, callback) => {
+    const { error, user } = addUser({ id: socket.id, newUsername, colour })
     if (error) {
       return callback(error)
     }
@@ -45,7 +46,7 @@ io.on('connection', (socket) => {
     updateLastActive(currentUser)
     io.to(room).emit('getAllUsers', { users: getAllUsers() })
 
-    io.to(room).emit('msg', { username: currentUser.username, message })
+    io.to(room).emit('msg', { username: currentUser.username, message, colour: currentUser.colour , timeSent:moment().format('HH:mm:ss')})
     // use to clear the input text area on the front end
     callback()
   })
