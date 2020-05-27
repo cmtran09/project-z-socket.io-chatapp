@@ -71,6 +71,7 @@ io.on('connection', (socket) => {
   })
 })
 
+// for development
 // app.use('/', router)
 
 // for deployment
