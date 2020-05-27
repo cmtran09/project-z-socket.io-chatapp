@@ -1,0 +1,34 @@
+.speech-bubble {
+  filter: drop-shadow(-1px -1px 2px rgba(black, .10)) drop-shadow(1px 2px 2px rgba(black, .15));
+  margin: 5px;
+  margin-top: 25px;
+  padding: 10px 10px;
+  border-radius: 3px;
+  position: relative;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 12px;
+  width: 90%;
+  // font-weight: 400;
+  background: grey;
+  margin-block-end:0;
+  // color: $bubble-color;
+}
+
+.user-cite {
+  right: 2rem;
+}
+
+.speech-bubble cite {
+  position: absolute;
+  margin-bottom: 5px;
+  bottom: -2rem;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  color: black;
+}
+
+p.bubble-text {
+  margin: 0;
+}

@@ -90,7 +90,7 @@ export default function Chat(props) {
                     <Grid.Row >
                       <Grid.Column><p>Chat Room Messages</p></Grid.Column>
                     </Grid.Row>
-                    <ChatContent allMsg={allMsg} />
+                    <ChatContent allMsg={allMsg} currentUser={newUsername}/>
                     <ChatForm userMsg={userMsg} setUserMsg={setUserMsg} sendMsg={sendMsg} />
                   </Grid>
                 </Segment>
