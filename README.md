@@ -10,7 +10,7 @@ In this project, I created a simple chat room where users can join a room see wh
 To see the deployed project navigate to to this address: https://project-z-socketio-chat-app.herokuapp.com/
 
 See below for a quick demo of the application.
-![Demo](https://imgur.com/QmYKkuw.gif)
+![Demo](https://imgur.com/DSGd1Ne.gif)
 
 ## Technologies Used
 * HTML
